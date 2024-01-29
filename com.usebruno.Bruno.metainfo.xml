@@ -6,6 +6,7 @@
   <summary>Fast and Git-Friendly API Client</summary>
   <developer_name>Bruno</developer_name>
   <url type="homepage">https://www.usebruno.com/</url>
+  <url type="bugtracker">https://github.com/usebruno/bruno/issues</url>
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
@@ -19,6 +20,7 @@
       <li>Stores your collections in a folder on your filesystem</li>
       <li>Use git for collaboration </li>
       <li>No cloud sync. Fully offline.</li>
+      <li>Majority of our features are free and have been opensourced under the MIT license. See: https://github.com/usebruno/bruno</li>
     </ul>
   </description>
 
@@ -30,6 +32,7 @@
   </screenshots>
 
   <releases>
+    <release version="v1.7.0" date="2024-01-30"></release>
     <release version="v1.5.1" date="2023-12-18"></release>
   </releases>
 
