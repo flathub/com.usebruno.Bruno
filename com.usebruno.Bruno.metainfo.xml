@@ -32,6 +32,7 @@
   </screenshots>
 
   <releases>
+    <release version="v1.17.0" date="2024-05-09"></release>
     <release version="v1.16.1" date="2024-05-04"></release>
     <release version="v1.14.0" date="2024-04-22"></release>
     <release version="v1.12.3" date="2024-03-26"></release>
