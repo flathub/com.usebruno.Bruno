@@ -32,9 +32,9 @@ modules:
 
       - type: extra-data
         url: https://github.com/usebruno/bruno/releases/download/v1.26.2/bruno_1.26.2_x86_64_linux.AppImage
-        sha256: 55deea067141ada49db88808ad34694c324ac819792d80415f38d0d134decbb7
+        sha256: 5a861f0eb67a194eb90cdbed91c4dcdc66e3e1a59aff39b1aa0077279db2dcd8
         filename: bruno.appimage
-        size: 121656379
+        size: 123653635
 
       - type: file
         path: apply_extra.sh
