@@ -10,7 +10,7 @@
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
-  <content_rating type="oars-1.1" />
+  <content_rating type="oars-1.1"/>
 
   <description>
     <p>
@@ -32,38 +32,41 @@
   </screenshots>
 
   <releases>
-    <release version="v1.30.0" date="2024-09-21"></release>
-    <release version="v1.29.1" date="2024-09-18"></release>
-    <release version="v1.29.0" date="2024-09-17"></release>
-    <release version="v1.28.0" date="2024-09-04"></release>
-    <release version="v1.27.0" date="2024-08-27"></release>
-    <release version="v1.26.2" date="2024-08-26"></release>
-    <release version="v1.26.1" date="2024-08-22"></release>
-    <release version="v1.26.0" date="2024-08-21"></release>
-    <release version="v1.25.0" date="2024-08-14"></release>
-    <release version="v1.24.0" date="2024-08-08"></release>
-    <release version="v1.23.1" date="2024-08-01"></release>
-    <release version="v1.23.0" date="2024-07-31"></release>
-    <release version="v1.22.0" date="2024-07-23"></release>
-    <release version="v1.21.0" date="2024-07-17"></release>
-    <release version="v1.20.4" date="2024-07-15"></release>
-    <release version="v1.20.3" date="2024-07-12"></release>
-    <release version="v1.20.2" date="2024-07-07"></release>
-    <release version="v1.20.1" date="2024-07-04"></release>
-    <release version="v1.19.0" date="2024-06-11"></release>
-    <release version="v1.18.0" date="2024-05-23"></release>
-    <release version="v1.17.0" date="2024-05-09"></release>
-    <release version="v1.16.1" date="2024-05-04"></release>
-    <release version="v1.14.0" date="2024-04-22"></release>
-    <release version="v1.12.3" date="2024-03-26"></release>
-    <release version="v1.12.2" date="2024-03-21"></release>
-    <release version="v1.11.0" date="2024-03-13"></release>
-    <release version="v1.10.0" date="2024-02-28"></release>
-    <release version="v1.9.0" date="2024-02-14"></release>
-    <release version="v1.8.0" date="2024-02-06"></release>
-    <release version="v1.7.1" date="2024-01-31"></release>
-    <release version="v1.7.0" date="2024-01-30"></release>
-    <release version="v1.5.1" date="2023-12-18"></release>
+    <release version="1.30.0" date="2024-09-21">
+      <description></description>
+    </release>
+    <release version="v1.30.0" date="2024-09-21"/>
+    <release version="v1.29.1" date="2024-09-18"/>
+    <release version="v1.29.0" date="2024-09-17"/>
+    <release version="v1.28.0" date="2024-09-04"/>
+    <release version="v1.27.0" date="2024-08-27"/>
+    <release version="v1.26.2" date="2024-08-26"/>
+    <release version="v1.26.1" date="2024-08-22"/>
+    <release version="v1.26.0" date="2024-08-21"/>
+    <release version="v1.25.0" date="2024-08-14"/>
+    <release version="v1.24.0" date="2024-08-08"/>
+    <release version="v1.23.1" date="2024-08-01"/>
+    <release version="v1.23.0" date="2024-07-31"/>
+    <release version="v1.22.0" date="2024-07-23"/>
+    <release version="v1.21.0" date="2024-07-17"/>
+    <release version="v1.20.4" date="2024-07-15"/>
+    <release version="v1.20.3" date="2024-07-12"/>
+    <release version="v1.20.2" date="2024-07-07"/>
+    <release version="v1.20.1" date="2024-07-04"/>
+    <release version="v1.19.0" date="2024-06-11"/>
+    <release version="v1.18.0" date="2024-05-23"/>
+    <release version="v1.17.0" date="2024-05-09"/>
+    <release version="v1.16.1" date="2024-05-04"/>
+    <release version="v1.14.0" date="2024-04-22"/>
+    <release version="v1.12.3" date="2024-03-26"/>
+    <release version="v1.12.2" date="2024-03-21"/>
+    <release version="v1.11.0" date="2024-03-13"/>
+    <release version="v1.10.0" date="2024-02-28"/>
+    <release version="v1.9.0" date="2024-02-14"/>
+    <release version="v1.8.0" date="2024-02-06"/>
+    <release version="v1.7.1" date="2024-01-31"/>
+    <release version="v1.7.0" date="2024-01-30"/>
+    <release version="v1.5.1" date="2023-12-18"/>
   </releases>
 
   <update_contact>anoop@usebruno.com</update_contact>
