@@ -1,9 +1,9 @@
 id: com.usebruno.Bruno
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: '23.08'
+base-version: "23.08"
 command: bruno
 finish-args:
   - --share=network
@@ -33,10 +33,10 @@ modules:
           - zypak-wrapper.sh /app/extra/bruno/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
 
       - type: extra-data
-        url: https://github.com/usebruno/bruno/releases/download/v1.37.0/bruno_1.37.0_x86_64_linux.AppImage
-        sha256: b4a997569964623ab8ba263268bfc9366501e3d92d8b258f91d86c21cf3010c2
+        url: https://github.com/usebruno/bruno/releases/download/v1.38.0/bruno_1.38.0_x86_64_linux.AppImage
+        sha256: 568a534ebfc4c124145cfeaf69fe9be4cf73f8e1d27e9978a4c48d837732d0a1
         filename: bruno.appimage
-        size: 124055338
+        size: 125226938
 
       - type: file
         path: apply_extra.sh
