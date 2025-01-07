@@ -12,6 +12,8 @@ finish-args:
   - --share=ipc
   - --device=dri
   - --filesystem=home
+    # required to fix cursor scaling on wayland, especially with fractional scaling
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 modules:
   - name: unappimage
     buildsystem: simple
