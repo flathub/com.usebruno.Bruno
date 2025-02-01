@@ -36,7 +36,7 @@ modules:
         url: https://github.com/usebruno/bruno/releases/download/v1.38.1/bruno_1.38.1_x86_64_linux.AppImage
         sha256: 9674d9289ef2c07d744fdc5bce6fe24201bf74b665832ac5b94a1a99a9009a27
         filename: bruno.appimage
-        size: 125226938
+        size: 124980895
 
       - type: file
         path: apply_extra.sh
