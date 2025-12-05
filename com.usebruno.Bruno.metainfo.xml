@@ -7,6 +7,7 @@
   <developer_name>Bruno</developer_name>
   <url type="homepage">https://www.usebruno.com/</url>
   <url type="bugtracker">https://github.com/usebruno/bruno/issues</url>
+  <url type="vcs-browser">https://github.com/usebruno/bruno</url>
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
@@ -20,7 +21,7 @@
       <li>Stores your collections in a folder on your filesystem</li>
       <li>Use git for collaboration </li>
       <li>No cloud sync. Fully offline.</li>
-      <li>Majority of our features are free and have been opensourced under the MIT license. See: https://github.com/usebruno/bruno</li>
+      <li>Majority of our features are free and have been opensourced under the MIT license.</li>
     </ul>
   </description>
 
@@ -28,10 +29,12 @@
   <screenshots>
     <screenshot type="default">
       <image>https://usebruno-public.s3.us-east-1.amazonaws.com/bruno.png</image>
+      <caption>Bruno API Client</caption>
     </screenshot>
   </screenshots>
 
   <releases>
+    <release version="v2.15.1" date="2025-12-05"></release>
     <release version="v2.15.0" date="2025-11-28"></release>
     <release version="v2.14.2" date="2025-11-13"></release>
     <release version="v2.14.1" date="2025-11-10"></release>
