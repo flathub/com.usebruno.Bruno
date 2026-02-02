@@ -4,8 +4,7 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
-command: run.sh
-separate-locales: false
+command: bruno
 rename-desktop-file: bruno.desktop
 rename-icon: bruno
 finish-args:
@@ -21,7 +20,6 @@ modules:
   - name: bruno
     buildsystem: simple
     sources:
-      # x86_64 deb package
       - type: file
         only-arches:
           - x86_64
@@ -34,7 +32,6 @@ modules:
           version-query: .tag_name | sub("^v"; "")
           url-query: .assets[] | select(.name == "bruno_" + $version + "_amd64_linux.deb") | .browser_download_url
 
-      # arm64 deb package
       - type: file
         only-arches:
           - aarch64
@@ -49,10 +46,10 @@ modules:
           url-query: .assets[] | select(.name == "bruno_" + $version + "_arm64_linux.deb") | .browser_download_url
           is-main-source: true
 
-      # Wrapper script to launch the app with zypak
       - type: script
-        dest-filename: run.sh
+        dest-filename: bruno
         commands:
+          # Electron needs a writable tmp dir, the default /tmp is read-only in Flatpak
           - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
           - exec zypak-wrapper /app/main/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
 
@@ -60,25 +57,15 @@ modules:
         path: com.usebruno.Bruno.metainfo.xml
 
     build-commands:
-      # Create directories
       - mkdir -p /app/main /app/bin
-
-      # Extract deb package using bsdtar (cleaner one-liner)
       - bsdtar -Oxf bruno.deb data.tar.xz | bsdtar -xf -
-
-      # Copy application files to /app/main
       - cp -r opt/Bruno/* /app/main/
-
-      # Install icons from deb (multiple sizes, excluding 1024x1024 which exceeds Flatpak's 512x512 limit)
+      # Install icons from deb (excluding 1024x1024 which exceeds Flatpak's 512x512 limit)
       - rm -rf usr/share/icons/hicolor/1024x1024
       - cp -r usr/share/icons /app/share/
-
       # Install desktop file from deb and fix Exec line for Flatpak
       - install -Dm644 usr/share/applications/bruno.desktop /app/share/applications/bruno.desktop
-      - desktop-file-edit --set-key=Exec --set-value="run.sh %U" /app/share/applications/bruno.desktop
-
-      # Install wrapper script
-      - install -Dm755 run.sh /app/bin/run.sh
-
-      # Install metainfo
+      - desktop-file-edit --set-key=Exec --set-value="bruno %U" /app/share/applications/bruno.desktop
+      # Install wrapper script and metainfo
+      - install -Dm755 bruno /app/bin/bruno
       - install -Dm644 "${FLATPAK_ID}.metainfo.xml" -t "${FLATPAK_DEST}/share/metainfo"
