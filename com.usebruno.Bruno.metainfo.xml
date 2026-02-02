@@ -8,9 +8,10 @@
   <url type="homepage">https://www.usebruno.com/</url>
   <url type="bugtracker">https://github.com/usebruno/bruno/issues</url>
   <url type="vcs-browser">https://github.com/usebruno/bruno</url>
+  <url type="help">https://www.usebruno.com/support</url>
 
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>LicenseRef-proprietary</project_license>
+  <project_license>MIT</project_license>
   <content_rating type="oars-1.1" />
 
   <description>

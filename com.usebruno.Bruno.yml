@@ -4,7 +4,10 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
-command: bruno
+command: run.sh
+separate-locales: false
+rename-desktop-file: bruno.desktop
+rename-icon: bruno
 finish-args:
   - --share=network
   - --socket=wayland
@@ -12,46 +15,70 @@ finish-args:
   - --share=ipc
   - --device=dri
   - --filesystem=home
-    # required to fix cursor scaling on wayland, especially with fractional scaling
+  # required to fix cursor scaling on wayland, especially with fractional scaling
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 modules:
-  - name: unappimage
-    buildsystem: simple
-    build-commands:
-      - make -C squashfs-tools install INSTALL_DIR=/app/bin
-    sources:
-      - type: git
-        url: https://github.com/refi64/unappimage
-        commit: d7f86f2a0d7ec3a69211125207d5f127386b849a
-
   - name: bruno
     buildsystem: simple
     sources:
+      # x86_64 deb package
+      - type: file
+        only-arches:
+          - x86_64
+        url: https://github.com/usebruno/bruno/releases/download/v3.0.2/bruno_3.0.2_amd64_linux.deb
+        sha256: 7337897b7729b01284c1ea5f365076e56f04c9937abbc749b847451b6d568271
+        dest-filename: bruno.deb
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/usebruno/bruno/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name == "bruno_" + $version + "_amd64_linux.deb") | .browser_download_url
+
+      # arm64 deb package
+      - type: file
+        only-arches:
+          - aarch64
+        url: https://github.com/usebruno/bruno/releases/download/v3.0.2/bruno_3.0.2_arm64_linux.deb
+        sha256: 457a10ce35a207a033dfc1d19d65b19b761a36058ec873f9cd96eba23a2d1774
+        dest-filename: bruno.deb
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/usebruno/bruno/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          timestamp-query: .published_at
+          url-query: .assets[] | select(.name == "bruno_" + $version + "_arm64_linux.deb") | .browser_download_url
+          is-main-source: true
+
+      # Wrapper script to launch the app with zypak
       - type: script
-        dest-filename: bruno
+        dest-filename: run.sh
         commands:
-          - zypak-wrapper.sh /app/extra/bruno/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
-
-      - type: extra-data
-        url: https://github.com/usebruno/bruno/releases/download/v3.0.2/bruno_3.0.2_x86_64_linux.AppImage
-        sha256: 5d1d4bd3ae7197ca4d79b369e1febb80f180fd3b60593a74c554f44f1c356e40
-        filename: bruno.appimage
-        size: 162114347
-
-      - type: file
-        path: apply_extra.sh
-
-      - type: file
-        path: com.usebruno.Bruno.desktop
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - exec zypak-wrapper /app/main/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
 
       - type: file
         path: com.usebruno.Bruno.metainfo.xml
 
-      - type: file
-        path: com.usebruno.Bruno.png
     build-commands:
-      - install -Dm755 ./apply_extra.sh "${FLATPAK_DEST}/bin/apply_extra"
-      - install -Dm755 bruno -t "${FLATPAK_DEST}/bin/"
-      - install -Dm644 "${FLATPAK_ID}.desktop" -t "${FLATPAK_DEST}/share/applications"
+      # Create directories
+      - mkdir -p /app/main /app/bin
+
+      # Extract deb package using bsdtar (cleaner one-liner)
+      - bsdtar -Oxf bruno.deb data.tar.xz | bsdtar -xf -
+
+      # Copy application files to /app/main
+      - cp -r opt/Bruno/* /app/main/
+
+      # Install icons from deb (multiple sizes, excluding 1024x1024 which exceeds Flatpak's 512x512 limit)
+      - rm -rf usr/share/icons/hicolor/1024x1024
+      - cp -r usr/share/icons /app/share/
+
+      # Install desktop file from deb and fix Exec line for Flatpak
+      - install -Dm644 usr/share/applications/bruno.desktop /app/share/applications/bruno.desktop
+      - desktop-file-edit --set-key=Exec --set-value="run.sh %U" /app/share/applications/bruno.desktop
+
+      # Install wrapper script
+      - install -Dm755 run.sh /app/bin/run.sh
+
+      # Install metainfo
       - install -Dm644 "${FLATPAK_ID}.metainfo.xml" -t "${FLATPAK_DEST}/share/metainfo"
-      - install -Dm644 com.usebruno.Bruno.png -t "${FLATPAK_DEST}/share/icons/hicolor/512x512/apps"
