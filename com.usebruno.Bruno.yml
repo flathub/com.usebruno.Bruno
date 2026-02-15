@@ -49,9 +49,7 @@ modules:
       - type: script
         dest-filename: bruno
         commands:
-          # Electron needs a writable tmp dir, the default /tmp is read-only in Flatpak
-          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
-          - exec zypak-wrapper /app/main/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
+          - zypak-wrapper.sh /app/main/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
 
       - type: file
         path: com.usebruno.Bruno.metainfo.xml
