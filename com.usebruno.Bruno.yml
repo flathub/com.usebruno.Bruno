@@ -1,9 +1,9 @@
 id: com.usebruno.Bruno
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: '24.08'
+base-version: '25.08'
 command: bruno
 finish-args:
   - --share=network
@@ -17,6 +17,8 @@ finish-args:
 modules:
   - name: unappimage
     buildsystem: simple
+    build-options:
+      cflags: "-std=gnu89"
     build-commands:
       - make -C squashfs-tools install INSTALL_DIR=/app/bin
     sources:
