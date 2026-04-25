@@ -17,6 +17,8 @@ finish-args:
 modules:
   - name: unappimage
     buildsystem: simple
+    build-options:
+      cflags: "-std=gnu89"
     build-commands:
       - make -C squashfs-tools install INSTALL_DIR=/app/bin
     sources:
