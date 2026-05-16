@@ -23,8 +23,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://github.com/usebruno/bruno/releases/download/v3.1.0/bruno_3.1.0_amd64_linux.deb
-        sha256: 99def5dbee8387ce87d0fcfd6e2ede42feea8609e0b52df3b9fe11353d72f14f
+        url: https://github.com/usebruno/bruno/releases/download/v3.3.0/bruno_3.3.0_amd64_linux.deb
+        sha256: d318c2b1adad00cd2e40e4255391f64b0564cc32b46b98c909c845e97d6762b8
         dest-filename: bruno.deb
         x-checker-data:
           type: json
@@ -35,8 +35,8 @@ modules:
       - type: file
         only-arches:
           - aarch64
-        url: https://github.com/usebruno/bruno/releases/download/v3.1.0/bruno_3.1.0_arm64_linux.deb
-        sha256: 9a2203321c27987cadd507df828ddf38c5866d031f0ced1c7fdd23280355e183
+        url: https://github.com/usebruno/bruno/releases/download/v3.3.0/bruno_3.3.0_arm64_linux.deb
+        sha256: 11f3576fcf42b258e23a081e47e932c2cf8a5e93cca4188eebeefaefc93e1830
         dest-filename: bruno.deb
         x-checker-data:
           type: json
