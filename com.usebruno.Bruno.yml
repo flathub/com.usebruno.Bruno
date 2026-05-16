@@ -5,6 +5,8 @@ sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 command: bruno
+rename-desktop-file: bruno.desktop
+rename-icon: bruno
 finish-args:
   - --share=network
   - --socket=wayland
@@ -12,46 +14,56 @@ finish-args:
   - --share=ipc
   - --device=dri
   - --filesystem=home
-    # required to fix cursor scaling on wayland, especially with fractional scaling
+  # required to fix cursor scaling on wayland, especially with fractional scaling
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 modules:
-  - name: unappimage
-    buildsystem: simple
-    build-commands:
-      - make -C squashfs-tools install INSTALL_DIR=/app/bin
-    sources:
-      - type: git
-        url: https://github.com/refi64/unappimage
-        commit: d7f86f2a0d7ec3a69211125207d5f127386b849a
-
   - name: bruno
     buildsystem: simple
     sources:
+      - type: file
+        only-arches:
+          - x86_64
+        url: https://github.com/usebruno/bruno/releases/download/v3.3.0/bruno_3.3.0_amd64_linux.deb
+        sha256: d318c2b1adad00cd2e40e4255391f64b0564cc32b46b98c909c845e97d6762b8
+        dest-filename: bruno.deb
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/usebruno/bruno/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets[] | select(.name == "bruno_" + $version + "_amd64_linux.deb") | .browser_download_url
+
+      - type: file
+        only-arches:
+          - aarch64
+        url: https://github.com/usebruno/bruno/releases/download/v3.3.0/bruno_3.3.0_arm64_linux.deb
+        sha256: 11f3576fcf42b258e23a081e47e932c2cf8a5e93cca4188eebeefaefc93e1830
+        dest-filename: bruno.deb
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/usebruno/bruno/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          timestamp-query: .published_at
+          url-query: .assets[] | select(.name == "bruno_" + $version + "_arm64_linux.deb") | .browser_download_url
+          is-main-source: true
+
       - type: script
         dest-filename: bruno
         commands:
-          - zypak-wrapper.sh /app/extra/bruno/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
-
-      - type: extra-data
-        url: https://github.com/usebruno/bruno/releases/download/v3.3.0/bruno_3.3.0_x86_64_linux.AppImage
-        sha256: 92f59780da331b893ea26838eb7108b86182a8dc0b28553faccb5b94a2c878d8
-        filename: bruno.appimage
-        size: 165570977
-
-      - type: file
-        path: apply_extra.sh
-
-      - type: file
-        path: com.usebruno.Bruno.desktop
+          - zypak-wrapper.sh /app/main/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
 
       - type: file
         path: com.usebruno.Bruno.metainfo.xml
 
-      - type: file
-        path: com.usebruno.Bruno.png
     build-commands:
-      - install -Dm755 ./apply_extra.sh "${FLATPAK_DEST}/bin/apply_extra"
-      - install -Dm755 bruno -t "${FLATPAK_DEST}/bin/"
-      - install -Dm644 "${FLATPAK_ID}.desktop" -t "${FLATPAK_DEST}/share/applications"
+      - mkdir -p /app/main /app/bin
+      - bsdtar -Oxf bruno.deb data.tar.xz | bsdtar -xf -
+      - cp -r opt/Bruno/* /app/main/
+      # Install icons from deb (excluding 1024x1024 which exceeds Flatpak's 512x512 limit)
+      - rm -rf usr/share/icons/hicolor/1024x1024
+      - cp -r usr/share/icons /app/share/
+      # Install desktop file from deb and fix Exec line for Flatpak
+      - install -Dm644 usr/share/applications/bruno.desktop /app/share/applications/bruno.desktop
+      - desktop-file-edit --set-key=Exec --set-value="bruno %U" /app/share/applications/bruno.desktop
+      # Install wrapper script and metainfo
+      - install -Dm755 bruno /app/bin/bruno
       - install -Dm644 "${FLATPAK_ID}.metainfo.xml" -t "${FLATPAK_DEST}/share/metainfo"
-      - install -Dm644 com.usebruno.Bruno.png -t "${FLATPAK_DEST}/share/icons/hicolor/512x512/apps"
