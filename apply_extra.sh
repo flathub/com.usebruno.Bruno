@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Extract the appimage
+# Make the AppImage executable
 chmod +x bruno.appimage
-unappimage bruno.appimage >/dev/null
 
-# Move all the data to /app/extra/bruno
+# Use the AppImage's own extractor
+./bruno.appimage --appimage-extract >/dev/null
+
+# Move extracted contents
 mv squashfs-root bruno
 
 # Clean up
