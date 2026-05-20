@@ -5,6 +5,8 @@ sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 command: bruno
+tags:
+  - proprietary
 finish-args:
   - --share=network
   - --socket=wayland
