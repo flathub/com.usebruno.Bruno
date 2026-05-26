@@ -11,7 +11,8 @@ finish-args:
   - --socket=fallback-x11
   - --share=ipc
   - --device=dri
-  - --filesystem=home
+  # The default location to save new workspaces and collections
+  - --persist=bruno
     # required to fix cursor scaling on wayland, especially with fractional scaling
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 modules:
