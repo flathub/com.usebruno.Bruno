@@ -35,10 +35,10 @@ modules:
           - zypak-wrapper.sh /app/extra/bruno/bruno --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations "$@"
 
       - type: extra-data
-        url: https://github.com/usebruno/bruno/releases/download/v4.1.0/bruno_4.1.0_x86_64_linux.AppImage
-        sha256: 50deeed474542745b69ddb5bde3667dead0c93ff0d76e0d39526ae36cd234c92
+        url: https://github.com/usebruno/bruno/releases/download/v4.2.0/bruno_4.2.0_x86_64_linux.AppImage
+        sha256: 2b0e36969acc093e44e73aba39cac24e395228a68531b1a41944fb7f9b8a9524
         filename: bruno.appimage
-        size: 174123410
+        size: 173918133
 
       - type: file
         path: apply_extra.sh
