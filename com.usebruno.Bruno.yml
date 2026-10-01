@@ -21,10 +21,12 @@ modules:
     make-args:
       - NO_PERL=1
       - NO_TCLTK=1
+      - NO_RUST=1
     make-install-args:
       - INSTALL_SYMLINKS=1
       - NO_PERL=1
       - NO_TCLTK=1
+      - NO_RUST=1
     sources:
       - type: archive
         url: https://www.kernel.org/pub/software/scm/git/git-2.56.0.tar.gz
