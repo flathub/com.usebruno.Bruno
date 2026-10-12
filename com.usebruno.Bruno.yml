@@ -15,6 +15,27 @@ finish-args:
     # required to fix cursor scaling on wayland, especially with fractional scaling
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
 modules:
+  - name: git
+    cleanup:
+      - /share
+    make-args:
+      - NO_PERL=1
+      - NO_TCLTK=1
+      - NO_RUST=1
+    make-install-args:
+      - INSTALL_SYMLINKS=1
+      - NO_PERL=1
+      - NO_TCLTK=1
+      - NO_RUST=1
+    sources:
+      - type: archive
+        url: https://www.kernel.org/pub/software/scm/git/git-2.56.0.tar.gz
+        sha256: 826817fd3671b8565586d6d49f688298de8354ab11db829c02720e5c74b9b39f
+        x-checker-data:
+          type: anitya
+          project-id: 5350
+          url-template: https://www.kernel.org/pub/software/scm/git/git-$version.tar.gz
+
   - name: unappimage
     buildsystem: simple
     build-options:
